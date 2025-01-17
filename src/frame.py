@@ -21,8 +21,15 @@ class Frame:
         if len(self.frame) == 1:
             return self.__SCORE_BY_PINS[first_roll]
         second_roll = self.frame[1]
+        if self.is_spare():
+            return self.__SCORE_BY_PINS[second_roll]
         return self.__SCORE_BY_PINS[first_roll] + self.__SCORE_BY_PINS[second_roll]
 
+    def is_spare(self) -> bool:
+        return self.__SPARE in self.frame
+    
+    def is_strike(self) -> bool:
+        return self.__STRIKE in self.frame
 
     def __init__(self, frame: str):
         self.frame = repr(frame).replace("'", "")
@@ -42,3 +49,4 @@ if __name__ == "__main__":
     print(frame_ejemplo)
     print(frame_ejemplo.calculate_frame_score())
     print(repr(frame_ejemplo))
+
